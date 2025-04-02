@@ -1,0 +1,82 @@
+{
+  "hash": "4df502fd",
+  "configHash": "cbc38863",
+  "lockfileHash": "1825caa9",
+  "browserHash": "60f78b9c",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "90036557",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "7fb140df",
+      "needsInterop": true
+    },
+    "@mui/material/styles": {
+      "src": "../../node_modules/@mui/material/esm/styles/index.js",
+      "file": "@mui_material_styles.js",
+      "fileHash": "dbf33252",
+      "needsInterop": false
+    },
+    "@mui/material/TextField": {
+      "src": "../../node_modules/@mui/material/esm/TextField/index.js",
+      "file": "@mui_material_TextField.js",
+      "fileHash": "1c54af1e",
+      "needsInterop": false
+    },
+    "@mui/material/Autocomplete": {
+      "src": "../../node_modules/@mui/material/esm/Autocomplete/index.js",
+      "file": "@mui_material_Autocomplete.js",
+      "fileHash": "c9a3cc0c",
+      "needsInterop": false
+    },
+    "@mui/material/Typography": {
+      "src": "../../node_modules/@mui/material/esm/Typography/index.js",
+      "file": "@mui_material_Typography.js",
+      "fileHash": "e6c400d0",
+      "needsInterop": false
+    },
+    "@mui/material/utils": {
+      "src": "../../node_modules/@mui/material/esm/utils/index.js",
+      "file": "@mui_material_utils.js",
+      "fileHash": "0b72817c",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "125144ec",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-EWABU4ZR": {
+      "file": "chunk-EWABU4ZR.js"
+    },
+    "chunk-OAZAAUMI": {
+      "file": "chunk-OAZAAUMI.js"
+    },
+    "chunk-G4FQZWC4": {
+      "file": "chunk-G4FQZWC4.js"
+    },
+    "chunk-MD2HNYTK": {
+      "file": "chunk-MD2HNYTK.js"
+    },
+    "chunk-TM3YZSH4": {
+      "file": "chunk-TM3YZSH4.js"
+    },
+    "chunk-WNC6SCZS": {
+      "file": "chunk-WNC6SCZS.js"
+    },
+    "chunk-6GAV2S6I": {
+      "file": "chunk-6GAV2S6I.js"
+    },
+    "chunk-DC5AMYBS": {
+      "file": "chunk-DC5AMYBS.js"
+    }
+  }
+}

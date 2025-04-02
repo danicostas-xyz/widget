@@ -1,0 +1,25 @@
+.app {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  flex-direction: row;
+  background-color: #1a1a1a;
+}
+
+.titulo {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgb(80, 80, 80);
+  padding: 1.25em;
+  border-radius: 4px
+}
