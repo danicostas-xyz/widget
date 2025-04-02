@@ -5,6 +5,7 @@ import InputPoblacion from './components/InputPoblacion.jsx';
 import InputCalle from './components/InputCalle.jsx';
 import InputNumero from './components/InputNumero.jsx';
 import InputLetra from './components/InputLetra.jsx';
+import InputCups from './components/InputCups.jsx';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const darkTheme = createTheme({
@@ -52,24 +53,13 @@ export default function App() {
             calle={calle}
             numeroCalle={numeroCalle}
             setLetraCalle={setLetraCalle}
-          />
-          {/* <InputCups
-            provincia={provincia}
-            poblacion={poblacion}
-            calle={calle}
-            numeroCalle={numeroCalle}
             letraCalle={letraCalle}
             setCups={setCups}
-          /> */}
+          />
+          <InputCups
+            cups={`Cups: ${cups}`}
+          />
           </div>      
-        </div>
-       
-        <div className='resumen'>
-          <p className="provincia">{provincia}</p>
-          <p className="poblacion">{poblacion}</p>
-          <p className="calle">{calle}</p>
-          <p className="numero">{numeroCalle}</p>
-          <p className="letra">{letraCalle}</p>
         </div>
       </div>
     </ThemeProvider>

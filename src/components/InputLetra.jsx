@@ -9,13 +9,25 @@ import { fetchZohoData } from '../functions';
 
 
 // URL de tu API
-const apiUrl = 'https://creator.zoho.com/api/v2/pinout1/portal-de-propiedades/'; 
+const apiUrl = 'http://localhost:3000/'
 
-async function fetchPoblaciones({inputValue, provincia, poblacion, calle, numero}) {
+//const apiUrl = 'https://creator.zoho.com/api/v2/pinout1/portal-de-propiedades/'; 
+
+async function fetchLetra({inputValue, provincia, poblacion, calle, numero}) {
     try {
         const url = `${apiUrl}report/datos_cups_Report?provincia=${provincia}&poblacion=${poblacion}&calle=${calle}&numero=${numero}&criteria=letra.contains("${inputValue}")`;
-        const response = await fetchZohoData(url)
-        // const response = await axios.get(`${apiUrl}api/letras?calle=${calle}&provincia=${provincia}&poblacion=${poblacion}&numero=${numero}&letra=${inputValue}`);
+        //const response = await fetchZohoData(url)
+        const response = await axios.get(`${apiUrl}api/letras?calle=${calle}&provincia=${provincia}&poblacion=${poblacion}&numero=${numero}&letra=${inputValue}`);
+        return response.data.data || [];
+    } catch (error) {
+        console.error("Error al obtener calles:", error);
+        return [];
+    }
+}
+
+async function fetchCups({provincia, poblacion, calle, numero, letra}) {
+    try {
+        const response = await axios.get(`${apiUrl}api/cups?calle=${calle}&provincia=${provincia}&poblacion=${poblacion}&numero=${numero}&letra=${letra}`);
         return response.data.data || [];
     } catch (error) {
         console.error("Error al obtener calles:", error);
@@ -25,7 +37,7 @@ async function fetchPoblaciones({inputValue, provincia, poblacion, calle, numero
 
 const fetch = debounce(async (request, callback) => {
     try {
-        const suggestions = await fetchPoblaciones(request);
+        const suggestions = await fetchLetra(request);
 
         // Eliminar duplicados usando Map
         const suggestionsDistinct = [...new Map(suggestions.map(s => [s.letra, s])).values()];
@@ -38,6 +50,7 @@ const fetch = debounce(async (request, callback) => {
                     secondary_text: "España"
                 }
             }))
+
         );
     } catch (err) {
         console.error("Error en fetch:", err);
@@ -78,6 +91,22 @@ export default function InputCalle(props) {
         };
     }, [value, inputValue]);
 
+    // Nuevo useEffect para llamar a fetchCups cuando la letra seleccionada cambie
+    React.useEffect(() => {
+        if (value) {
+            fetchCups({
+                provincia: props.provincia,
+                poblacion: props.poblacion,
+                calle: props.calle,
+                numero: props.numeroCalle,
+                letra: props.letraCalle
+            }).then((response) => {
+                console.log(response)
+                props.setCups(response[0].cups)
+            });
+        }
+    }, [value]); // Se ejecuta cuando cambia `value`
+
     return (
         <Autocomplete
             sx={{ width: 300 }}
@@ -94,7 +123,7 @@ export default function InputCalle(props) {
                 setInputValue(newInputValue)
                 props.setLetraCalle(newInputValue)
             }}
-            renderInput={(params) => <TextField {...params} label="Busca una letra" fullWidth />}
+            renderInput={(params) => <TextField {...params} label="Letra" fullWidth />}
             renderOption={(props, option) => (
                 <li {...props}>
                     <Typography>{option.structured_formatting?.main_text || option.description}</Typography>
