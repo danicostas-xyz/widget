@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://danicostas-xyz.github.io/widget-test",
+  "homepage": "https://danicostas-xyz.github.io/widget",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
