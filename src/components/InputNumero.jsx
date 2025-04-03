@@ -17,6 +17,15 @@ async function fetchPoblaciones({inputValue, provincia, poblacion, calle}) {
     try {
         const url = `${apiUrl}report/datos_cups_Report?provincia=${provincia}&poblacion=${poblacion}&calle=${calle}&criteria=numero.contains("${inputValue}")`;
         //const response = await fetchZohoData(url)
+
+        // Si no hay ningún valor en el inputValue (=== ''), en vez de hacer consulta al endpoint de numeros,
+        // se hace consulta al endpoint de calles, sin pasar el número, para obtener todos los resultados posibles
+        // luego se accede a dicho resultado.numero para obtener los números disponibles
+        if (inputValue === '') {
+            const response = await axios.get(`${apiUrl}api/calles?calle=${calle}&provincia=${provincia}&poblacion=${poblacion}`);
+            return response.data.data || [];
+        }
+
         const response = await axios.get(`${apiUrl}api/numeros?calle=${calle}&provincia=${provincia}&poblacion=${poblacion}&numero=${inputValue}`);
         return response.data.data || [];
     } catch (error) {
@@ -54,10 +63,7 @@ export default function InputCalle(props) {
     const [options, setOptions] = React.useState([]);
 
     React.useEffect(() => {
-        if (inputValue === '') {
-            setOptions(value ? [value] : []);
-            return;
-        }
+        if (!props.poblacion || !props.provincia || !props.calle) return; // Si no hay numero, no hacer nada
 
         let active = true;
         fetch({inputValue: inputValue, // numero
@@ -77,7 +83,7 @@ export default function InputCalle(props) {
         return () => {
             active = false;
         };
-    }, [value, inputValue]);
+    }, [value, inputValue, props.poblacion, props.provincia, props.calle]);
 
     return (
         <Autocomplete

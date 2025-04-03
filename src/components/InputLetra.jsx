@@ -65,13 +65,11 @@ export default function InputCalle(props) {
     const [options, setOptions] = React.useState([]);
 
     React.useEffect(() => {
-        if (inputValue === '') {
-            setOptions(value ? [value] : []);
-            return;
-        }
-
+        if (!props.poblacion || !props.calle || !props.numeroCalle) return; // Si falta algún dato, no hacer nada
+    
         let active = true;
-        fetch({inputValue: inputValue, // letra
+        fetch({
+            inputValue: inputValue,
             poblacion: props.poblacion,
             provincia: props.provincia,
             calle: props.calle,
@@ -85,11 +83,12 @@ export default function InputCalle(props) {
                 setOptions(newOptions);
             }
         });
-
+    
         return () => {
             active = false;
         };
-    }, [value, inputValue]);
+    }, [value, inputValue, props.poblacion, props.provincia, props.calle, props.numeroCalle]);
+    
 
     // Nuevo useEffect para llamar a fetchCups cuando la letra seleccionada cambie
     React.useEffect(() => {
@@ -103,6 +102,7 @@ export default function InputCalle(props) {
             }).then((response) => {
                 console.log(response)
                 props.setCups(response[0].cups)
+                props.setBtDisabled(false)
             });
         }
     }, [value]); // Se ejecuta cuando cambia `value`

@@ -53,11 +53,10 @@ export default function InputCalle(props) {
     const [options, setOptions] = React.useState([]);
 
     React.useEffect(() => {
-        if (!props.poblacion) return; // Si no hay poblacion, no hacer nada
-
-
+        if (!props.poblacion || !props.provincia) return; // Si no hay población o provincia, salir
+    
         let active = true;
-        fetch({inputValue: inputValue || "*", // calle
+        fetch({ inputValue: inputValue || "*", // calle
             poblacion: props.poblacion,
             provincia: props.provincia
         }, (results) => {
@@ -69,11 +68,11 @@ export default function InputCalle(props) {
                 setOptions(newOptions);
             }
         });
-
+    
         return () => {
             active = false;
         };
-    }, [value, inputValue]);
+    }, [value, inputValue, props.poblacion, props.provincia]); 
 
     return (
         <Autocomplete

@@ -54,7 +54,9 @@ export default function InputPoblacion(props) {
         if (!props.provincia) return; // Si no hay provincia, no hacer nada
 
         let active = true;
-        fetch({ inputValue: inputValue || "*", provincia: props.provincia }, (results) => {
+        fetch({ inputValue: inputValue || "*", 
+            provincia: props.provincia 
+        }, (results) => {
             if (active) {
                 let newOptions = results || [];
                 if (value) {
